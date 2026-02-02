@@ -24,14 +24,15 @@ async function workerCase2(id: number) {
     console.log(`🔀Worker ${id}: before await`);
     // once the first worker runs into await, the second can start and so on
     await new Promise(resolve => setTimeout(resolve, 100));
+    //#&^
 
     // if one worker is here, only one worker can be here because the others are in await
     console.log(`🔀Worker ${id}: after await - doing no more sync work`);
-
-    // NO other worker interrupts this block
+    //
     let sum = 0;
     for (let i = 0; i < 3; i++) {
         console.log(`🔀Worker ${id}: no more sync loop iteration ${i}`);
+        // this await lets another worker step into the block starting at #&^
         await new Promise(resolve => setTimeout(resolve, 1));
         sum += i;
     }
